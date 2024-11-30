@@ -4,23 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>TO-Do List</h1>
+        <h1>To-Do List</h1>
     </header>
-    <div class="container">  
-        <input id="task-name" type="text" placeholder="Add Task Details">
-        <input id="task-date" type="date">
-        <input id="task-time" type="time">
-        <button id="add-task">Add Task</button> 
-               <div id="due-task">
-                  <ul></ul>
-               </div>
-               <div id="upcoming-task">
-                  <ul></ul>
-            </div>  
-      </div> 
+    <div class="container">
+        <input type="text" id="search-bar" placeholder="Search tasks...">
+        <input type="text" id="task-name" placeholder="Task Details ">
+        <input type="date" id="task-date">
+        <input type="time" id="task-time">
+        <button id="add-task">Add Task</button>
+        <div id="tasks-container">
+            <div id="today-section">
+                <h2>Today</h2>
+                <div id="due-tasks">
+                    <h3>Due Tasks</h3>
+                    <ul></ul>
+                </div>
+                <div id="upcoming-tasks">
+                    <h3>Upcoming Tasks</h3>
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>                   
 </body>
 </html>
