@@ -1,61 +1,35 @@
 const taskName = document.getElementById("task-name");
 const taskDate = document.getElementById("task-date");
 const taskTime = document.getElementById("task-time");
-const addTaskBut = document.getElementById("add-task");
-const taskList = document.getElementById("task-list");
-const dueTaskList = document.getElementById("due-task");
-const upcomingTaskList = document.getElementById("upcoming-task");
+const addTaskButton = document.getElementById("add-task");
+const dueTasksList = document.querySelector("#due-tasks ul");
+const upcomingTasksList = document.querySelector("#upcoming-tasks ul");
 
-function getTasks() {
-    let tasks = localStorage.getItem('tasks');
-    return tasks ? JSON.parse(tasks) : [];
-}
-
-function saveTasks(tasks) {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-}
+const getTasks = () => JSON.parse(localStorage.getItem("tasks")) || [];
+const saveTasks = (tasks) => localStorage.setItem("tasks", JSON.stringify(tasks));
 
 function renderTasks() {
     const tasks = getTasks();
+    const today = new Date().toISOString().split("T")[0];
 
-    dueTaskList.innerHTML = '';
-    upcomingTaskList.innerHTML = '';
+    dueTasksList.innerHTML = "";
+    upcomingTasksList.innerHTML = "";
 
-    const today = new Date().toISOString().split('T')[0]; 
+    tasks.forEach((task) => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `${task.description} <span>${task.time}</span>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>`;
 
-    const dueTasks = tasks.filter(task => task.date === today);
-    const upcomingTasks = tasks.filter(task => task.date !== today);
-
-    if (dueTasks.length > 0) {
-        dueTasks.forEach(task => {
-            const taskItem = document.createElement('li');
-            taskItem.innerHTML = `${task.description} - ${task.time}`;
-            dueTaskList.appendChild(taskItem);
-        });
-    } else {
-        const emptyMessage = document.createElement('li');
-        emptyMessage.textContent = "No tasks due today!";
-        dueTaskList.appendChild(emptyMessage);
-    }
-
-    if (upcomingTasks.length > 0) {
-        upcomingTasks.forEach(task => {
-            const taskItem = document.createElement('li');
-            taskItem.innerHTML = `${task.description} - ${task.time}`;
-            upcomingTaskList.appendChild(taskItem);
-        });
-    } else {
-        const emptyMessage = document.createElement('li');
-        emptyMessage.textContent = "No upcoming tasks!";
-        upcomingTaskList.appendChild(emptyMessage);
-    }
+        if (task.date === today) {
+            dueTasksList.appendChild(listItem);
+        } else {
+            upcomingTasksList.appendChild(listItem);
+        }
+    });
 }
 
 function addTask() {
-    if (!taskName.value || !taskDate.value || !taskTime.value) {
-        alert("Please fill in all fields");
-        return;
-    }
 
     const newTask = {
         id: Date.now(),
@@ -75,6 +49,17 @@ function addTask() {
     renderTasks();
 }
 
-addTaskBut.addEventListener('click', addTask);
 
-renderTasks();
+function filterTasks() {
+    const searchText = searchBar.value.toLowerCase();
+    const tasks = document.querySelectorAll("li");
+
+    tasks.forEach((task) => {
+        const text = task.textContent.toLowerCase();
+        task.style.display = text.includes(searchText) ? "" : "none";
+    });
+}
+
+addTaskButton.onclick = addTask;
+
+document.addEventListener("DOMContentLoaded", renderTasks);
