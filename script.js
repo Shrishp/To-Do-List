@@ -20,6 +20,8 @@ function renderTasks() {
         listItem.innerHTML = `${task.description} <span>${task.time}</span>
             <button class="edit-btn">Edit</button>
             <button class="delete-btn">Delete</button>`;
+        listItem.querySelector(".edit-btn").onclick = () => editTask(task.id);
+        listItem.querySelector(".delete-btn").onclick = () => deleteTask(task.id);    
 
         if (task.date === today) {
             dueTasksList.appendChild(listItem);
@@ -48,7 +50,22 @@ function addTask() {
 
     renderTasks();
 }
+function editTask(id) {
+    const tasks = getTasks();
+    const taskToEdit = tasks.find((task) => task.id === id);
 
+    taskName.value = taskToEdit.description;
+    taskDate.value = taskToEdit.date;
+    taskTime.value = taskToEdit.time;
+
+    deleteTask(id);
+}
+
+function deleteTask(id) {
+    const tasks = getTasks().filter((task) => task.id !== id);
+    saveTasks(tasks);
+    renderTasks();
+}
 
 function filterTasks() {
     const searchText = searchBar.value.toLowerCase();
@@ -59,6 +76,7 @@ function filterTasks() {
         task.style.display = text.includes(searchText) ? "" : "none";
     });
 }
+
 
 addTaskButton.onclick = addTask;
 
