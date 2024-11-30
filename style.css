@@ -1,14 +1,139 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
-  background-color: #f7f8fc;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  padding: 20px;
 }
 
 header {
-  background-color: #3f51b5;
-  color: white;
   text-align: center;
-  padding: 1rem 0;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  color: #fff;
+  background-color: #3b4fe4;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1.8rem;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+#search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+#task-name,
+#task-date,
+#task-time {
+  display: inline-block;
+  padding: 8px;
+  margin: 5px 0;
+  width: calc(33.3% - 10px);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+button#add-task {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button#add-task:hover {
+  background-color: #45a049;
+}
+
+#tasks-container {
+  margin-top: 20px;
+}
+
+#today-section h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+#due-tasks,
+#upcoming-tasks {
+  margin-bottom: 20px;
+}
+
+#due-tasks h3,
+#upcoming-tasks h3 {
+  color: #3b4fe4;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul li span {
+  font-weight: bold;
+  color: #333;
+}
+
+button.edit-btn {
+  background-color: #ffca28;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+button.edit-btn:hover {
+  background-color: #ffc107;
+}
+
+button.delete-btn {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.delete-btn:hover {
+  background-color: #e53935;
 }
