@@ -3,7 +3,8 @@ const taskDate = document.getElementById("task-date");
 const taskTime = document.getElementById("task-time");
 const addTaskButton = document.getElementById("add-task");
 const searchBar = document.getElementById("search-bar");
-
+const alertBox = document.getElementById("alert-box");
+const closeAlertBtn = document.getElementById("close-alert");
 const dueTasksList = document.querySelector("#due-tasks ul");
 const upcomingTasksList = document.querySelector("#upcoming-tasks ul");
 
@@ -34,6 +35,11 @@ function renderTasks() {
 }
 
 function addTask() {
+    if (!taskName.value || !taskDate.value || !taskTime.value) {
+        console.log("Alert triggered!");
+        alertBox.classList.remove("hidden");
+        return;
+    }
 
     const newTask = {
         id: Date.now(),
@@ -62,6 +68,11 @@ function editTask(id) {
 
     deleteTask(id);
 }
+function deleteTask(id) {
+    const tasks = getTasks().filter((task) => task.id !== id);
+    saveTasks(tasks);
+    renderTasks();
+}
 
 function filterTasks() {
     const searchText = searchBar.value.toLowerCase();
@@ -76,6 +87,5 @@ function filterTasks() {
 
 addTaskButton.onclick = addTask;
 searchBar.oninput = filterTasks;
-
-
+closeAlertBtn.onclick = () => alertBox.classList.add("hidden");
 document.addEventListener("DOMContentLoaded", renderTasks);

@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>To-Do List</h1>
     </header>
     <div class="container">
+        <div id="alert-box" class="alert hidden">
+            <span>Please fill in all fields</span>
+            <button id="close-alert">×</button>
+        </div>
         <input type="text" id="search-bar" placeholder="Search tasks...">
-        <input type="text" id="task-name" placeholder="Task Details ">
+        <input type="text" id="task-name" placeholder="Task Details">
         <input type="date" id="task-date">
         <input type="time" id="task-time">
         <button id="add-task">Add Task</button>
         <div id="tasks-container">
             <div id="today-section">
-                <h2>Today</h2>
                 <div id="due-tasks">
                     <h3>Due Tasks</h3>
                     <ul></ul>
@@ -28,6 +32,7 @@
                 </div>
             </div>
         </div>
-    </div>                   
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
